@@ -1,0 +1,9 @@
+[package]
+authors = ["David Roeca"]
+name = "wasm_game"
+version = "0.0.1"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
