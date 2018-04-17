@@ -1,4 +1,7 @@
-#[no_mangle]
-pub fn add(a: i32, b: i32) -> i32 {
-    a + b
-}
+///
+/// This file defines the final interface of all rust code, under `rust`.
+/// There should be very little code here, only `pub use` statements.
+///
+mod rust;
+
+pub use rust::add;
