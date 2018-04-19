@@ -4,4 +4,7 @@
 ///
 mod rust;
 
-pub use rust::add;
+pub use rust::{
+    render,
+    update,
+};

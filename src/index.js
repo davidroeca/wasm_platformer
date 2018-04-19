@@ -1,6 +1,11 @@
+import createImportObject from './js/createImportObject'
+import gameLoop from './js/gameLoop'
 import loadLib from './lib.rs'
 
-loadLib().then(result => {
-  const { add } = result.instance.exports
-  console.log('return value was', add(2, 3))
+loadLib({env: createImportObject()}).then(result => {
+  const rustLib = result.instance.exports
+  gameLoop(
+    rustLib.update,
+    rustLib.render
+  )
 })
