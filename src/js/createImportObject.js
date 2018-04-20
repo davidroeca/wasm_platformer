@@ -3,11 +3,17 @@
 // Creates the player, among other resources
 const getResources = () => {
   const player = document.createElement('canvas')
-  player.height = 10
-  player.width = 10
-  const playerContext = player.getContext('2d')
-  playerContext.fillStyle = 'blue'
-  playerContext.fillRect(0, 0, 10, 10)
+  player.height = 20
+  player.width = 20
+  const ctx = player.getContext('2d')
+  ctx.fillStyle = 'blue'
+  ctx.moveTo(0, 20)
+  ctx.lineTo(10, 0)
+  ctx.lineTo(20, 20)
+  ctx.lineTo(14, 15)
+  ctx.lineTo(6, 15)
+  ctx.lineTo(0, 20)
+  ctx.fill()
   return {
     player
   }
