@@ -18,7 +18,7 @@ impl PlayerState {
             move_down: false,
             move_left: false,
             move_right: false,
-            max_speed: 80.0,  // player width per second
+            max_speed: 20.0,  // player width per second
             position: Vector::new(0.0, 0.0),
             width: 20.0,
             height: 20.0,
