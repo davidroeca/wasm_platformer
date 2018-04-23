@@ -29,8 +29,8 @@ loadLib({env: createImportObject()}).then(result => {
         break
     }
   }
-  document.addEventListener('keydown', event => handleKey(event.key, true))
-  document.addEventListener('keyup', event => handleKey(event.key, true))
+  document.addEventListener('keydown', event => handleKey(event.key, 1))
+  document.addEventListener('keyup', event => handleKey(event.key, 0))
   gameLoop(
     rustLib.update,
     rustLib.render
