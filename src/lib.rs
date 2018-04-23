@@ -5,6 +5,12 @@
 mod rust;
 
 pub use rust::{
+    create_game,
+    free_game,
+    toggle_move_up,
+    toggle_move_down,
+    toggle_move_left,
+    toggle_move_right,
     render,
     update,
 };

@@ -4,7 +4,7 @@ pub struct Vector {
 }
 
 impl Vector {
-    pub fn new(x: i32, y: i32) -> Self {
-        return Self { x, y }
+    pub fn new(x: f32, y: f32) -> Self {
+        return Vector { x, y }
     }
 }

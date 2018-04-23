@@ -1,7 +1,4 @@
-mod coordinates;
-use coordinates::Vector;
-
-static const INV_ROOT_2: f32 = 1.0 / 2.0.sqrt();
+use rust::coordinates::Vector;
 
 pub struct PlayerState {
     pub move_up: bool,
@@ -10,6 +7,8 @@ pub struct PlayerState {
     pub move_left: bool,
     pub max_speed: f32,
     pub position: Vector,
+    pub width: f32,
+    pub height: f32,
 }
 
 impl PlayerState {
@@ -19,40 +18,44 @@ impl PlayerState {
             move_down: false,
             move_left: false,
             move_right: false,
-            max_speed: 3.0,  // player width per second
+            max_speed: 80.0,  // player width per second
             position: Vector::new(0.0, 0.0),
+            width: 20.0,
+            height: 20.0,
         }
     }
 
-    pub fn toggle_up(&mut self) {
-        self.move_up = !self.move_up;
+    pub fn toggle_up(&mut self, is_down: bool) {
+        self.move_up = is_down;
     }
 
-    pub fn toggle_down(&mut self) {
-        self.move_down = !self.move_down;
+    pub fn toggle_down(&mut self, is_down: bool) {
+        self.move_down = is_down;
     }
 
-    pub fn toggle_left(&mut self) {
-        self.move_left = !self.move_left;
+    pub fn toggle_left(&mut self, is_down: bool) {
+        self.move_left = is_down;
     }
 
-    pub fn toggle_right(&mut self) {
-        self.move_right = !self.move_right;
+    pub fn toggle_right(&mut self, is_down: bool) {
+        self.move_right = is_down;
     }
 
-    fn update(&mut self, dt: f32) {
-        let y_contrib = self.max_speed * (
-            (move_down as f32) - (move_up as f32)
+    pub fn update(&mut self, dt: f32) {
+        use std::f32::consts::SQRT_2;
+        let convert_bool = |b: bool| -> f32 {if b { 1.0 } else { 0.0 }};
+        let y_contrib = dt * self.width * self.max_speed * (
+            convert_bool(self.move_down) - convert_bool(self.move_up)
         );
-        let x_contrib = self.max_speed * (
-            (move_down as f32) - (move_up as f32)
+        let x_contrib = dt * self.width * self.max_speed * (
+            convert_bool(self.move_right) - convert_bool(self.move_left)
         );
-        if x_contrib && y_contrib {
-            self.position.x +=  INV_ROOT_2 * x_contrib * dt;
-            self.position.y +=  INV_ROOT_2 * y_contrib * dt;
+        if x_contrib != 0.0 && y_contrib != 0.0 {
+            self.position.x += x_contrib / (SQRT_2 as f32);
+            self.position.y += y_contrib / (SQRT_2 as f32);
         } else {
-            self.position.x +=  x_contrib * dt;
-            self.position.y +=  y_contrib * dt;
+            self.position.x +=  x_contrib;
+            self.position.y +=  y_contrib;
         }
     }
 }

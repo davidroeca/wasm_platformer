@@ -6,7 +6,7 @@ const getTimeStamp = () => (
 )
 
 // Deifne the loop itself
-const gameLoop = (update, render, fps = 60) => {
+const gameLoop = (game, update, render, fps = 60) => {
   const step = 1 / fps
   let last = getTimeStamp()
 
@@ -15,9 +15,9 @@ const gameLoop = (update, render, fps = 60) => {
     let dt = Math.min(1, (now - last) / 1000)
     while (dt > step) {
       dt = dt - step
-      update(dt)
+      update(game, dt)
     }
-    render(dt)
+    render(game, dt)
     last = now
     requestAnimationFrame(frame)
   }
